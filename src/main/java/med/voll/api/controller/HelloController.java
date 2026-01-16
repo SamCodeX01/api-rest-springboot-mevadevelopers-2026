@@ -1,16 +1,11 @@
-package med.voll.api;
+package med.voll.api.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-//Marcar a classe como um controlador: O Spring reconhece a classe anotada como um componente que gerencia solicitações HTTP.
-//Retornar dados diretamente como resposta (corpo da
-//@RestController automaticamente serializa o objeto de retorno do método em um formato como JSON ou XML e o envia diretamente como o corpo (body) da resposta HTTP, sem a necessidade de uma tecnologia de visualização.
-@RequestMapping("/pizza") // Direciona URLs específicas para o código que deve processá-las. Define o endpoint (caminho da URL) que um método ou classe de controlador irá gerenciar.
-//Pizza esta gerenciando batata ou a batata esta gerenciando a pizza?
+@RestController // ("Retorne dados (JSON), não páginas")
+@RequestMapping("/pizza") //Define o endpoint (caminho da URL) que um método ou classe de controlador irá gerenciar. Pizza CONTÉM Batata como um de seus recursos
 public class HelloController {
 
     // A função primária é designar qual método do controlador deve ser executado quando uma requisição HTTP do tipo GET é recebida em um determinado caminho (URL).
@@ -20,11 +15,6 @@ public class HelloController {
         return "Hello World!1";
     }
 
-    @PostMapping
-    public String olaMundo3(){
-       System.out.println("Hello Samuel! 3");
-       return "ssssssssssssssss";
-    }
 }
 
 
