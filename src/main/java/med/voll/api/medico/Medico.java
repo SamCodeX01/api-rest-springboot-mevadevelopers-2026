@@ -24,6 +24,13 @@ public class Medico {
     @Enumerated(EnumType.STRING)
     private  Especialidade especialidade;
 
-    @Embedded
+    @Embedded //os atributos da classe Endereco estao sendo embebidos, usado aqui dentro dessa classe medico
     private Endereco endereco;
+
+    public Medico(DadosCadastrados dados) {
+        this.nome = dados.nome();
+        this.email = dados.email();
+        this.crm = dados.crm();
+        this.endereco = new Endereco(dados.endereco());
+    }
 }
