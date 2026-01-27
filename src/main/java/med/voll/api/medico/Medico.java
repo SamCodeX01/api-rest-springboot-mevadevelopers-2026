@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import med.voll.api.endereco.Endereco;
 
-@Table
+@Table(name = "medicos")
 @Entity
 @Getter
 @NoArgsConstructor
@@ -22,15 +22,19 @@ public class Medico {
     private String crm;
 
     @Enumerated(EnumType.STRING)
-    private  Especialidade especialidade;
+    private Especialidade especialidade;
 
-    @Embedded //os atributos da classe Endereco estao sendo embebidos, usado aqui dentro dessa classe medico
+    private String telefone;
+
+    @Embedded //os atributos da classe Endereco estao sendo embebidos, usados aqui dentro dessa classe medico
     private Endereco endereco;
 
-    public Medico(DadosCadastrados dados) {
+    public Medico(DadosCadastroMedico dados) {
         this.nome = dados.nome();
         this.email = dados.email();
         this.crm = dados.crm();
+        this.telefone = dados.telefone();
+        this.especialidade = dados.especialidade();
         this.endereco = new Endereco(dados.endereco());
     }
 }
