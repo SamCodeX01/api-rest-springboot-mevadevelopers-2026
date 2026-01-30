@@ -7,6 +7,8 @@ import med.voll.api.medico.DadosListagemMedico;
 import med.voll.api.medico.Medico;
 import med.voll.api.medico.MedicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,9 +28,11 @@ import java.util.List;
     }
 
     @GetMapping
-    public List<DadosListagemMedico> listar(){
-        return repository.findAll().stream().map(DadosListagemMedico::new).toList(); //findAll() serve para buscar e retornar todos os registros existentes em uma determinada tabela de banco de dados.
+    public Page<DadosListagemMedico> listar(Pageable paginacao){
+//        return repository.findAll(paginacao).stream().map(DadosListagemMedico::new).toList(); //findAll() serve para buscar e retornar todos os registros existentes em uma determinada tabela de banco de dados.
+        return repository.findAll(paginacao).map(DadosListagemMedico::new); //findAll() serve para buscar e retornar todos os registros existentes em uma determinada tabela de banco de dados.
     }
+
 }
 
 //@Autowired permite que o spring injete automaticamente instancias dessa classe,
@@ -36,5 +40,4 @@ import java.util.List;
 
 //O @Autowired instrui o spring a procurar um bean que ira injetar na onde for necessario,
 // pode serem um atributo,m construtor ou setter
-
 
