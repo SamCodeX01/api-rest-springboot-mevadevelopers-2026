@@ -2,10 +2,7 @@ package med.voll.api.controller;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
-import med.voll.api.medico.DadosCadastroMedico;
-import med.voll.api.medico.DadosListagemMedico;
-import med.voll.api.medico.Medico;
-import med.voll.api.medico.MedicoRepository;
+import med.voll.api.medico.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -31,6 +28,15 @@ import java.util.List;
     public Page<DadosListagemMedico> listar(Pageable paginacao){
 //        return repository.findAll(paginacao).stream().map(DadosListagemMedico::new).toList(); //findAll() serve para buscar e retornar todos os registros existentes em uma determinada tabela de banco de dados.
         return repository.findAll(paginacao).map(DadosListagemMedico::new); //findAll() serve para buscar e retornar todos os registros existentes em uma determinada tabela de banco de dados.
+            //Não precisa stream() pq o findAll(devolve um Page e o Page já possui um map()
+            //E não precisa do toList() pq o map() já faz a conversão e devolve o Page do DTO
+    }
+
+    @PutMapping
+    @Transactional
+    public void atualizar(@RequestBody @Valid DadosAtualizacaoMedico dados){//DadosAtualizacaoMedico ira receber com a ajuda do @RequestBody, os dados via json através da requisição post
+        var medico = repository.getReferenceById(dados.id());
+        medico.atualizarInformacoes(dados);
     }
 
 }
