@@ -27,7 +27,7 @@ import java.util.List;
     @GetMapping
     public Page<DadosListagemMedico> listar(Pageable paginacao){
 //        return repository.findAll(paginacao).stream().map(DadosListagemMedico::new).toList(); //findAll() serve para buscar e retornar todos os registros existentes em uma determinada tabela de banco de dados.
-        return repository.findAll(paginacao).map(DadosListagemMedico::new); //findAll() serve para buscar e retornar todos os registros existentes em uma determinada tabela de banco de dados.
+        return repository.findAllByAtivoTrue(paginacao).map(DadosListagemMedico::new); //findAll() serve para buscar e retornar todos os registros existentes em uma determinada tabela de banco de dados.
             //Não precisa stream() pq o findAll(devolve um Page e o Page já possui um map()
             //E não precisa do toList() pq o map() já faz a conversão e devolve o Page do DTO
     }
@@ -39,6 +39,13 @@ import java.util.List;
         medico.atualizarInformacoes(dados);
     }
 
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void excluir(@PathVariable Long id){//@PathVariable é um parametro que vem da URL, nesse caso o ID que esta vino pela URL
+//      repository.deleteById(id);//Aqui apaga o registro no banco de dados pelo ID
+        var medico = repository.getReferenceById(id);
+        medico.excluir();
+    }
 }
 
 //@Autowired permite que o spring injete automaticamente instancias dessa classe,

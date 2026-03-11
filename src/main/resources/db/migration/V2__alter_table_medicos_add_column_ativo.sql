@@ -1,0 +1,2 @@
+alter table medicos add ativo tinyint; --aqui esta alterando a table ade medicos adicionando uma coluna chamadaa ativo do tipo tinyint
+update medicos set ativo = 1; --atualiza a tabela medicos colocando todos como ativo 1

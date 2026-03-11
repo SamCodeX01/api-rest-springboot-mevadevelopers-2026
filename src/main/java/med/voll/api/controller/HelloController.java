@@ -10,9 +10,8 @@ public class HelloController {
 
     // A função primária é designar qual método do controlador deve ser executado quando uma requisição HTTP do tipo GET é recebida em um determinado caminho (URL).
     @GetMapping("/batata")
-    public String olaMundo1(){
+    public void olaMundo1(){
        System.out.println("Hello Samuel 1!");
-        return "Hello World!1";
     }
 
 }
